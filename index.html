@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI 용의자 심문 추리 게임, 마지막 열차의 거짓말">
+  <title>마지막 열차의 거짓말</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=Song+Myung&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="noise"></div>
+  <header class="topbar">
+    <div class="brand"><span>CASE</span> 0719</div>
+    <div class="case-status"><span class="pulse"></span> 수사 진행 중</div>
+    <button id="resetBtn" class="ghost-btn">처음부터</button>
+  </header>
+
+  <main>
+    <section id="intro" class="intro-screen">
+      <div class="intro-copy">
+        <p class="eyebrow">AI INTERROGATION GAME</p>
+        <h1>마지막 열차의<br><em>거짓말</em></h1>
+        <p class="lead">밤 11시 42분, 부산행 마지막 열차에서 유명 AI 연구자의 노트북이 사라졌다. 열차가 종착역에 닿기까지 남은 시간은 단 5분.</p>
+        <div class="rule-row">
+          <div><strong>03</strong><span>용의자</span></div>
+          <div><strong>05</strong><span>증거</span></div>
+          <div><strong>01</strong><span>진실</span></div>
+        </div>
+        <button id="startBtn" class="primary-btn">수사 시작 <span>→</span></button>
+      </div>
+      <div class="ticket">
+        <div class="ticket-head"><span>KTX 0719</span><span>23:42</span></div>
+        <div class="route"><strong>DAEJEON</strong><i></i><strong>BUSAN</strong></div>
+        <div class="seat">CAR 4 · SEAT 11A</div>
+        <div class="barcode">|||| || ||| |||| | ||| || ||||</div>
+      </div>
+    </section>
+
+    <section id="game" class="game-screen hidden">
+      <aside class="case-panel">
+        <div>
+          <p class="eyebrow">CASE FILE</p>
+          <h2>사라진<br>프로토타입</h2>
+          <p class="summary">피해자 한도윤 박사는 23:30, 식당칸에서 돌아온 뒤 가방 속 노트북이 사라진 것을 발견했다.</p>
+        </div>
+        <div class="timer-wrap">
+          <span>종착역까지</span>
+          <strong id="timer">05:00</strong>
+        </div>
+        <div>
+          <p class="section-label">확보한 증거</p>
+          <div id="evidenceList" class="evidence-list"></div>
+        </div>
+        <button id="accuseBtn" class="accuse-btn">범인 지목하기 <span id="clueCount">0/3</span></button>
+      </aside>
+
+      <section class="interrogation">
+        <div class="suspect-tabs" id="suspectTabs"></div>
+        <div class="profile">
+          <div class="portrait" id="portrait"><span></span></div>
+          <div class="profile-copy">
+            <p id="role" class="eyebrow"></p>
+            <h2 id="suspectName"></h2>
+            <p id="suspectMeta"></p>
+          </div>
+          <div class="trust"><span>동요 지수</span><div><i id="trustBar"></i></div><strong id="trustValue">12%</strong></div>
+        </div>
+
+        <div id="chat" class="chat" aria-live="polite"></div>
+
+        <div class="suggestions" id="suggestions"></div>
+        <form id="chatForm" class="chat-input">
+          <input id="questionInput" autocomplete="off" placeholder="용의자에게 질문하세요…" aria-label="심문 질문">
+          <button aria-label="질문 보내기">↑</button>
+        </form>
+      </section>
+
+      <aside class="notes-panel">
+        <p class="section-label">형사의 메모</p>
+        <div id="clueLog" class="clue-log">
+          <p class="empty-note">대화 속 모순을 발견하면<br>여기에 기록됩니다.</p>
+        </div>
+        <div class="tip"><strong>TIP</strong><p>시간, 목격자, 소지품에 관해 물어보세요. 증거를 클릭하면 상대에게 제시할 수 있습니다.</p></div>
+      </aside>
+    </section>
+  </main>
+
+  <div id="accuseModal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <button class="close-btn" data-close>×</button>
+      <p class="eyebrow">FINAL DECISION</p>
+      <h2>범인은 누구입니까?</h2>
+      <p>한 번 지목하면 되돌릴 수 없습니다.</p>
+      <div id="accuseOptions" class="accuse-options"></div>
+    </div>
+  </div>
+
+  <div id="resultModal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card result-card">
+      <p id="resultEyebrow" class="eyebrow"></p>
+      <div id="resultMark" class="result-mark"></div>
+      <h2 id="resultTitle"></h2>
+      <p id="resultText"></p>
+      <div class="truth-box"><strong>사건의 진실</strong><p>서지우는 플랫폼 카페에서 박사의 카드를 몰래 가져와 객실 문을 열었다. 정전 직후 노트북을 청소 카트에 숨겼고, 23:31에 카트를 연결 통로로 옮겼다.</p></div>
+      <button id="replayBtn" class="primary-btn">다시 수사하기</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
