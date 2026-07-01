@@ -1,0 +1,4 @@
+interface:
+  display_name: "시험문제 출제"
+  short_description: "교수님의 강조점을 반영해 예상문제와 해설을 만듭니다"
+  default_prompt: "Use $exam-question-generator to analyze my course materials and create professor-aligned practice questions."
